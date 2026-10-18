@@ -7,10 +7,10 @@ This is the start of a longer path toward quantum computing and quantum machine 
 
 ## Notebooks
 
-| Notebook | What it covers | Open |
-|---|---|---|
-| `Quantum_Computing_Introduction.ipynb` | Building a 4-qubit circuit, applying X gates, inspecting the `Statevector`, measuring, and sampling 100 shots with `StatevectorSampler` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Harsh-L/Quantum-Computing-Introduction/blob/main/Quantum_Computing_Introduction.ipynb) |
-| `Quantum_Computing_Arithmetic.ipynb` | Addition, subtraction, multiplication, division and negation on quantum circuits, plus circuit-building experiments and a first look at a QML ansatz | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Harsh-L/Quantum-Computing-Introduction/blob/main/Quantum_Computing_Arithmetic.ipynb) |
+| Notebook | What it covers | 
+|---|---|
+| `Quantum_Computing_Introduction.ipynb` | Building a 4-qubit circuit, applying X gates, inspecting the `Statevector`, measuring, and sampling 100 shots with `StatevectorSampler` |
+| `Quantum_Computing_Arithmetic.ipynb` | Addition, subtraction, multiplication, division and negation on quantum circuits, plus circuit-building experiments and a first look at a QML ansatz |
 
 ## What I explored
 
@@ -61,8 +61,8 @@ jupyter notebook
 I'm Harsh Lad, a Dynamics 365 Business Central consultant in Surat, India, moving into quantum computing.
 I'm interested in where quantum methods could meet real business problems.
 
-- LinkedIn: https://www.linkedin.com/in/harsh-lad
-- Portfolio: https://harsh-lad.pages.dev
+- [LinkedIn](https://www.linkedin.com/in/harsh-lad)
+- [Portfolio](https://harsh-lad.pages.dev)
 
 Feedback and corrections are welcome. Open an issue or message me.
 

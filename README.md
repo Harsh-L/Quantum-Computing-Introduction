@@ -7,38 +7,47 @@ This is the start of a longer path toward quantum computing and quantum machine 
 
 ## Notebooks
 
-| Notebook | What it covers | 
+| Notebook | What it covers |
 |---|---|
-| `Quantum_Computing_Introduction.ipynb` | Building a 4-qubit circuit, applying X gates, inspecting the `Statevector`, measuring, and sampling 100 shots with `StatevectorSampler` |
+| `Quantum_Computing_Introduction.ipynb` | Small experiments to understand what a qubit really is: superposition, measurement, state vectors, interference and phase |
 | `Quantum_Computing_Arithmetic.ipynb` | Addition, subtraction, multiplication, division and negation on quantum circuits, plus circuit-building experiments and a first look at a QML ansatz |
 
 ## What I explored
 
-**1. Introduction**
-- Flipping qubits with X gates and reading the resulting state vector (qubits 1 and 3 flipped gives the basis state `|1010>`)
-- Measuring and sampling: 100 shots returned `{'1010': 100}`, as expected for a deterministic circuit
+**1. Core qubit concepts (Introduction notebook)**
+
+Each experiment starts with a question, and I try to predict the answer before running it.
+
+- **Superposition:** one Hadamard (H) gate, then measure. 1000 shots gave `{'1': 511, '0': 489}`, close to 50/50
+- **Randomness:** running the same circuit 5 times gives different counts each time (between 469 and 514 zeros out of 1000). Every single measurement is random
+- **State vectors:** after one H gate, the state is `[0.707, 0.707]`, which is 1/√2 for both 0 and 1
+- **X then H:** gives `[0.707, -0.707]`. Same 50/50 counts when measured, but notice the minus sign
+- **H twice:** 1000 out of 1000 shots return `0`. Not random at all. The two paths interfere and cancel out
+- **Two qubits:** H on both gives an equal superposition of all 4 outcomes (`0.5` each). H on only qubit 0 gives just `00` and `01`, because qubit 1 never leaves 0
+- **Valid states:** amplitudes must have squares that add up to 1. `[0.6, 0.8]` is valid (probabilities 0.36 and 0.64), while `[0.5, 0.5]` and `[1, 1]` are not
+- **Phase:** `|+>` and `|->` both measure 50/50, with exactly the same probabilities. Add one more H and `|+>` becomes `0` while `|->` becomes `1`. The difference is hidden in the phase
 
 **2. Arithmetic**
 - **Addition** with Qiskit's `HalfAdderGate`. Example: 2 + 3 gives 5
-- **Subtraction** by running an adder backwards (`ModularAdderGate(n).inverse()`). Example: 20 - 2 gives 18
+- **Subtraction** by running an adder backwards (`ModularAdderGate(n).inverse()`). Example: 5 - 2 gives 3
 - **Multiplication** with `MultiplierGate`. Example: 2 x 3 gives 6
-- **Division**, built from scratch because Qiskit has no ready-made divider. It is restoring long division made of adders, a copy of the "went negative" flag, and a controlled add-back. Example: 13 / 4 gives quotient 3, remainder 1
+- **Division**, built from scratch because Qiskit has no ready-made divider. It is binary long division made of adders: subtract the divisor, check if the result went negative, and add it back if it did. Example: 10 / 4 gives quotient 2, remainder 2
 - **Negation** with two's complement: flip every bit, then add one. Example: 5 becomes `1011`, which reads as -5
 - Composing circuits, converting them to gates, adding control qubits, and conditional gates with `if_test`
 - A first look at `real_amplitudes`, a parameterized circuit used in QML
 
-All arithmetic circuits were checked against plain Python for every input pair up to 3 bits, and against a few larger examples.
+The arithmetic circuits are checked against plain Python for every input pair up to 3 bits.
 
 ## Known limitations
 
 - Everything runs on simulators, not real quantum hardware (yet)
-- The circuits grow quickly with the size of the numbers. Dividing 13 by 4 already needs 17 qubits, so keep inputs small
+- The arithmetic circuits grow quickly with the size of the numbers. Dividing 10 by 4 already needs 17 qubits, so keep inputs small
 - Division works for whole numbers with a non-zero divisor
-- The notebooks were last run with Qiskit 2.6.0 and Qiskit Aer 0.17.2. The install cell is unpinned, so a future Qiskit release may need small updates
+- Built with Qiskit 2.x. The install cells are unpinned, so a future Qiskit release may need small updates
 
 ## Run it
 
-**In Google Colab:** click an "Open in Colab" badge above and run the cells from top to bottom.
+**In Google Colab:** open a notebook here on GitHub, click the "Open in Colab" badge at the top, and run the cells from top to bottom.
 
 **Locally:**
 ```bash
@@ -51,8 +60,10 @@ jupyter notebook
 ## Roadmap
 
 - [x] Qubits, gates, state vectors, measurement
+- [x] Superposition and interference with the Hadamard gate
 - [x] Quantum addition, subtraction, multiplication, division and negation
-- [ ] Superposition and entanglement (Bell states)
+- [ ] Phase and the Z gate (in progress)
+- [ ] Entanglement (Bell states)
 - [ ] Run circuits on real IBM Quantum hardware
 - [ ] Quantum machine learning (QML) basics
 
